@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.yourcodelab.db.ConnectDB;
+import com.yourcodelab.model.Category;
 import com.yourcodelab.model.Customer;
 
 
@@ -32,6 +33,11 @@ public class CustomerDao extends GenericDAO{
 			ps.setInt(1, c.getId());
 			ps.setString(2, c.getName());
 			ps.setString(3, c.getEmail());
+
+
+	
+			
+			
 			// Executar o comando de INSERT, logo não se espera retorno
 			ps.executeUpdate();
 			// Fechar conexão
@@ -61,7 +67,9 @@ public class CustomerDao extends GenericDAO{
 				Customer c = new Customer
 						(rs.getInt("id"), 
 										rs.getString("name"),
-										rs.getString("email"));
+										rs.getString("email"),
+										new Category(rs.getInt("idCategory"),rs.getString("Category")));
+										
 				lista.add(c);
 			}
 		}
@@ -101,7 +109,7 @@ public class CustomerDao extends GenericDAO{
 		ps.setString(1,c);
 		ResultSet rs = ps.executeQuery();
 		while(rs.next()){
-			customer = new Customer(rs.getInt("id"),rs.getString("name"),rs.getString("email"));	
+			customer = new Customer(rs.getInt("id"),rs.getString("name"),rs.getString("email"),new Category(rs.getInt("idCategory"),rs.getString("Category")));	
 			//System.out.println("name"+c.getName());
 		}
 		return obterCustomerPorname(c);

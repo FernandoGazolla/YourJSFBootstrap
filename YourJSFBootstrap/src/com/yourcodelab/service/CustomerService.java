@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.yourcodelab.dao.CustomerDao;
+import com.yourcodelab.model.Category;
 import com.yourcodelab.model.Customer;
 
 public class CustomerService {
@@ -31,7 +32,7 @@ public class CustomerService {
 	
 	public List<Customer> findCustomerByName(String name) throws ClassNotFoundException, IOException, SQLException{
 		List<Customer> list = new ArrayList<Customer>();
-		Customer c = new Customer(0,name,"");
+		Customer c = new Customer(0,name,"",new Category(0,""));
 			list = dao.obterCustomerPorname(name);
 			return list;
 	}
